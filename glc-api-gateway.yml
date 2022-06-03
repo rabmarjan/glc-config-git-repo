@@ -33,5 +33,5 @@ management:
 # Used to define the circuit breaker configuration.
 circuitBreaker:
   config:
-    firstBackoff: '1000'
-    maxBackoff: '5000'
+    firstBackoff: 4000
+    maxBackoff: 5000
