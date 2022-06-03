@@ -1,0 +1,37 @@
+server:
+  port: 8765
+spring:
+  application:
+    name: glc-api-gateway
+## commented line should preserve for future usage because sometimes
+## we need to write some configuration property in yml format
+#  cloud:
+#    gateway:
+#      discovery:
+#        locator:
+#          lowerCaseServiceId: true
+#          enabled: true
+
+# Used to define the service name for the gateway to route to.
+glc:
+  service:
+    glc-cecurity: 'lb://GLC-CECURITY'
+
+# Used to register the gateway to the eureka server.
+eureka:
+  client:
+    serviceUrl:
+       defaultZone: http://admin:admin@localhost:8761/eureka, http://glc:glc@peer-1-server.com:9001/eureka, http://glc:glc@peer-2-server.com:9002/eureka, http://glc:glc@peer-3-server.com:9003/eureka
+
+# Exposing all the actuator endpoints.
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+# Used to define the circuit breaker configuration.
+circuitBreaker:
+  config:
+    firstBackoff: '1000'
+    maxBackoff: '5000'
